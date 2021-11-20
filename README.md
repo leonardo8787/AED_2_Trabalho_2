@@ -65,6 +65,10 @@ void rebalanceTree(Tree **t){
 
 <h2>Reflexão sobre a atividade</h2>
 
+A atividade proposta permite que testemos a performace da presente árvore, denominada árvore AVL. Tal árvore permite 
+o balanceamento dos valores extremos da árvore, o que é um grande avanço, comparado a árvore normal, visto que a árvore AVL 
+diminui o custo computacional de O(n * log n) para O(log n), por causa do balanceamento.
+
 <h2>Custo computacional da Árvore AVL</h2>
 
 <table>
