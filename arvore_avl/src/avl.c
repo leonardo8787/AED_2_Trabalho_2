@@ -93,7 +93,7 @@ void rebalanceTree(Tree **t){
   printf("Raiz:%d, Filho esq:%d, Filho dir:%d\n", balance, left, right);
   printf("===================================\n");
 
-  if( balance == 1 || balance == 0 && left == 0 && right == 0){
+  if( balance == 1 || balance == -1 || balance == 0){
     printf("árvore balanceada!\n");
   } else {
     printf("árvore não balanceada!\n");
