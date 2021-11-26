@@ -41,9 +41,17 @@ void rebalanceTree(Tree **t){
   if((*t)->dir)
     right = getWeight(&(*t)->dir->esq) - getWeight(&(*t)->dir->dir);
 
-  printf("==== Valores de balanceamento: ====\n");
-  printf("Raiz:%d, Filho esq:%d, Filho dir:%d\n", balance, left, right);
-  printf("===================================\n");
+  printf("Item:%d, peso:%d, peso esq:%d, peso dir:%d\n", (*t)->reg.key, balance, left, right);
+
+  if(balance == 2 && left >= 0)
+    rotacaoSimplesDireita(t);
+  if(balance == 2 && left < 0)
+    rotacaoDuplaDireita(t);
+
+  if(balance == -2 && right <= 0)
+    rotacaoSimplesEsquerda(t);
+  if(balance == -2 && right > 0)
+    rotacaoDuplaEsquerda(t);  
 
   if( balance == 1 || balance == -1 || balance == 0){
     printf("árvore balanceada!\n");
@@ -51,15 +59,6 @@ void rebalanceTree(Tree **t){
     printf("árvore não balanceada!\n");
   }
 
-  if(balance == 2 && left >= 0)
-    rotacaoSimplesDireita(t);
-  if(balance == 2 && left < 0)
-    rotacaoDuplaDireita(t);
-
-  if(balance == -2 && right >= 0)
-    rotacaoDuplaEsquerda(t);
-  if(balance == -2 && right < 0)
-    rotacaoSimplesEsquerda(t);  
 }
 ~~~
 
