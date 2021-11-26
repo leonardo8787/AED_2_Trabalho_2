@@ -45,7 +45,7 @@ int main(){
 	            printf("\nÁrvore\n");
 	            printf("[");
 	            central(raiz);
-	            printf("fim]");
+	            printf("]");
 	            printf("\n");
 	            break;
 	        case 4:

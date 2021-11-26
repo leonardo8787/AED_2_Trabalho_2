@@ -38,7 +38,6 @@ void insertTree(Tree **t, Record r){
   }
 
   (*t)->weight = getMaxWeight(getWeight(&(*t)->esq), getWeight(&(*t)->dir)) + 1;
-
 }
 
 
@@ -89,9 +88,17 @@ void rebalanceTree(Tree **t){
   if((*t)->dir)
     right = getWeight(&(*t)->dir->esq) - getWeight(&(*t)->dir->dir);
 
-  printf("==== Valores de balanceamento: ====\n");
-  printf("Raiz:%d, Filho esq:%d, Filho dir:%d\n", balance, left, right);
-  printf("===================================\n");
+  printf("Item:%d, peso:%d, peso esq:%d, peso dir:%d\n", (*t)->reg.key, balance, left, right);
+
+  if(balance == 2 && left >= 0)
+    rotacaoSimplesDireita(t);
+  if(balance == 2 && left < 0)
+    rotacaoDuplaDireita(t);
+
+  if(balance == -2 && right <= 0)
+    rotacaoSimplesEsquerda(t);
+  if(balance == -2 && right > 0)
+    rotacaoDuplaEsquerda(t);  
 
   if( balance == 1 || balance == -1 || balance == 0){
     printf("árvore balanceada!\n");
@@ -99,15 +106,6 @@ void rebalanceTree(Tree **t){
     printf("árvore não balanceada!\n");
   }
 
-  if(balance == 2 && left >= 0)
-    rotacaoSimplesDireita(t);
-  if(balance == 2 && left < 0)
-    rotacaoDuplaDireita(t);
-
-  if(balance == -2 && right >= 0)
-    rotacaoDuplaEsquerda(t);
-  if(balance == -2 && right < 0)
-    rotacaoSimplesEsquerda(t);  
 }
 
 void removeTree(Tree **t, Tree **f, Record r){
@@ -132,20 +130,22 @@ void removeTree(Tree **t, Tree **f, Record r){
     if ((*t)->esq != NULL){ 
       antecessor(&(*t)->esq, *t);
       rebalanceTree(f);
+      rebalanceTree(t);
       return;
     }
 
     aux = *t;  
     *t = (*t)->dir;
     free(aux);
-    rebalanceTree(f);   
+    rebalanceTree(f);
+    rebalanceTree(t);   
     
 }
 
 void preordem(Tree *t)
 {
   if(!(t == NULL)){
-    printf("%d\t", t->reg.key);
+    printf("%d:%d\t", t->reg.key, t->weight);
     preordem(t->esq); 
     preordem(t->dir); 
   }
