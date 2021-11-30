@@ -100,9 +100,11 @@ void rebalanceTree(Tree **t){
   if(balance == -2 && right > 0)
     rotacaoDuplaEsquerda(t);  
 
+  balance = getWeight(&(*t)->esq) - getWeight(&(*t)->dir);
   if( balance == 1 || balance == -1 || balance == 0){
     printf("árvore balanceada!\n");
   } else {
+    //preordem(*t);
     printf("árvore não balanceada!\n");
   }
 
